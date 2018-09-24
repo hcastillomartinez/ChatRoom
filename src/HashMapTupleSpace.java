@@ -3,7 +3,7 @@ package sample;
 import java.util.*;
 
 public class HashMapTupleSpace extends TupleSpace{
-//    private List<Tuple> listN=new ArrayList<>();
+
     HashMap<Integer,List<Tuple>>map=new HashMap<>();
 
     /**
@@ -14,7 +14,7 @@ public class HashMapTupleSpace extends TupleSpace{
      * @param tuple The Tuple to be added to the tuple space
      */
     public void add(Tuple tuple) {
-        //list of tuple size doesnt exist yet
+        //list of tuple size doesn't exist yet
         if (map.containsKey(tuple.getSize()) == false) {
             List<Tuple> list = new ArrayList<>();
             map.put(tuple.getSize(), list);
@@ -37,6 +37,7 @@ public class HashMapTupleSpace extends TupleSpace{
         Tuple p=new Tuple(pattern);
         if(map.containsKey(p.getSize())==true){
             List<Tuple> list=map.get(p.getSize());
+            Collections.shuffle(list);
             for(Iterator<Tuple> iterator=list.iterator();iterator.hasNext();){
                 Tuple temp=iterator.next();
                 if(temp.isEqual(p)==true){
@@ -45,6 +46,8 @@ public class HashMapTupleSpace extends TupleSpace{
                 }
             }
         }
+        System.out.println("not found returning search");
+        p=null;
         return p;
     }
 
@@ -57,6 +60,7 @@ public class HashMapTupleSpace extends TupleSpace{
         Tuple p=new Tuple(pattern);
         if(map.containsKey(p.getSize())==true){
             List<Tuple> list=map.get(p.getSize());
+            Collections.shuffle(list);
             for(Iterator<Tuple> iterator=list.iterator();iterator.hasNext();){
                 Tuple temp=iterator.next();
                 if(temp.isEqual(p)==true){
@@ -64,6 +68,8 @@ public class HashMapTupleSpace extends TupleSpace{
                 }
             }
         }
+        System.out.println("not found returning search");
+        p=null;
         return p;
     }
 }

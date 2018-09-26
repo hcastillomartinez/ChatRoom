@@ -1,0 +1,54 @@
+package sample;
+
+/**
+ * When new User is created the tuple Info contains all of user's information in the pattern.
+ * The first index is boolean to whether user is online or not. Second index is the users name.
+ * Any index after that is the users messages with the last index being the latest message.
+ */
+public class User {
+    private boolean active;
+    private String lastMessage;
+    private String name;
+
+    public User(String name){
+        this.name=name;
+        this.active=false;
+    }
+
+//    /**
+//     * Gets all info (tuple) of user.
+//     * @return Returns a tuple that contains info of user in its pattern.
+//     */
+//    public Tuple getInfo(){
+//        return info;
+//    }
+
+    /**
+     * Gets name of user.
+     * @return
+     */
+    public String getName(){
+        return name;
+    }
+
+    /**
+     * Gets status of whether user is online or not. This flag exists in the first
+     * index of the tuple Info's pattern.
+     * @return Returns boolean that indicates if user is online or not.
+     */
+    public boolean getStatus(){
+        return active;
+    }
+
+    /**
+     * Grabs the last message from user
+     * @return Returns String that is users last message
+     */
+    public String lastMessage(){
+        return lastMessage;
+    }
+
+    public void updateLastMessage(String message){
+        lastMessage=message;
+    }
+}

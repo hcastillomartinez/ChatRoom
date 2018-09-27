@@ -1,41 +1,28 @@
 package sample;
 
-import java.util.Stack;
-
 public class Messages {
-    Stack<String> messages=new Stack<>();
-//    String message;
-//    public Messages(String message){
-//        this.message=message;
-//    }
-    public void addMessage(String message){
-        messages.push(message);
+    private String[] times;
+    private TupleSpace allMessages;
+    private int count;
+    public Messages(){
+        times=new String[10];
+        allMessages=new HashMapTupleSpace();
+        count=0;
     }
 
-    public String getMessages(){
+    public void addMessage(String time, User user, String message) {
+        Tuple t = new Tuple(time, user, message);
+        times[count%10]=time;
+        count++;
+        allMessages.add(t);
+    }
+
+    public String getMessages() {
         String message="";
-        int start=messages.size();
-        int diff=start-10;
-        if(diff<=0) {
-            System.out.println("caca");
-            for (int i = 0; i < messages.size(); i++) {
-                if(i!=messages.size()-1){
-                    message+=messages.get(i)+"\n";
-                }
-                else{
-                    message+=messages.get(i);
-                }
-            }
-        }
-        else{
-            System.out.println("here");
-            for(int i=diff;i<messages.size();i++){
-                if(i!=messages.size()-1){
-                    message+=messages.get(i)+"\n";
-                }
-                else{
-                    message+=messages.get(i);
-                }
+        for(String s: times){
+            if(s!=null) {
+                Tuple tuple = allMessages.read(s, "*", "*");
+                message += tuple.stringTuple();
             }
         }
         return message;

@@ -1,3 +1,4 @@
+package sample;
 
 public class Tuple {
     private Object[] pattern;
@@ -11,10 +12,13 @@ public class Tuple {
         return size;
     }
 
-    public void printTuple(){
+    public String stringTuple(){
+        String tupleString="";
         for(int i=0;i<size;i++){
-            System.out.println(pattern[i]+" "+ pattern[i].getClass());
+            tupleString+=pattern[i]+" ";
         }
+        tupleString+="\n";
+        return tupleString;
     }
 
     public boolean isEqual(Tuple t){
@@ -28,6 +32,9 @@ public class Tuple {
             }
         }
         return true;
+    }
+    public Object getFirst(){
+        return pattern[0];
     }
     public Object[] getPattern(){
         return pattern;

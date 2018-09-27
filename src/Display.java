@@ -8,6 +8,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Display extends Application {
 
     @Override
@@ -25,6 +28,9 @@ public class Display extends Application {
         menu.getItems().add(addUser);
         menuBar.getMenus().add(menu);
         root.getChildren().add(menuBar);
+        addUser.setOnAction(e->{
+            System.out.println("adduser");
+        });
 
         Button activeButton=new Button("ACTIVE");
         activeButton.setLayoutX(24);
@@ -83,7 +89,10 @@ public class Display extends Application {
 
         Messages messages=new Messages();
         sendButton.setOnMousePressed(e->{
-            messages.addMessage(textField.getText());
+            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalDateTime now=LocalDateTime.now();
+            String time=dateTimeFormatter.format(now);
+            messages.addMessage(time,new User("alex"),textField.getText());
             Text message=new Text(messages.getMessages());
             messageHolder.setContent(message);
         });

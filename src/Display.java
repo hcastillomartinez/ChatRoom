@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Display extends Application {
 
@@ -28,9 +30,7 @@ public class Display extends Application {
         menu.getItems().add(addUser);
         menuBar.getMenus().add(menu);
         root.getChildren().add(menuBar);
-        addUser.setOnAction(e->{
-            System.out.println("adduser");
-        });
+        UserList uList=new UserList();
 
         Button activeButton=new Button("ACTIVE");
         activeButton.setLayoutX(24);
@@ -68,11 +68,11 @@ public class Display extends Application {
         messageHolder.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         root.getChildren().add(messageHolder);
 
-        ScrollPane userList=new ScrollPane();
+        ListView<String> userList=new ListView<>();
         userList.setLayoutX(11);
         userList.setLayoutY(128);
         userList.setPrefSize(360,88);
-        userList.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        userList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         root.getChildren().add(userList);
 
         Pane userHolder=new Pane();
@@ -86,6 +86,31 @@ public class Display extends Application {
         userName.setStyle("-fx-font-size: 16");
         userHolder.getChildren().add(userName);
         root.getChildren().add(userHolder);
+        addUser.setOnAction(e->{
+            System.out.println("adduser");
+            final Stage nestStage=new Stage();
+            nestStage.setResizable(false);
+            Pane pane=new Pane();
+            TextField userNam=new TextField();
+            userNam.setLayoutX(0);
+            userNam.setPrefSize(80,20);
+            Button add=new Button("ADD");
+            add.setLayoutX(100);
+            pane.getChildren().addAll(userNam,add);
+            add.setOnMousePressed(el->{
+                uList.addUser(new User(userNam.getText()));
+                List<User> allUsers=uList.getAllList();
+                userList.getItems().clear();
+                for(int i=0;i<allUsers.size();i++){
+                    userList.getItems().add(allUsers.get(i).getName());
+                }
+            });
+            Scene scene = new Scene(pane);
+            nestStage.setScene(scene);
+            nestStage.show();
+        });
+
+
 
         Messages messages=new Messages();
         sendButton.setOnMousePressed(e->{
@@ -96,6 +121,11 @@ public class Display extends Application {
             Text message=new Text(messages.getMessages());
             messageHolder.setContent(message);
         });
+
+        ObservableList selectedUser=userList.getSelectionModel().getSelectedIndices();
+        for(Object s: selectedUser){
+            userName.setText((String)s);
+        }
 
         Scene scene= new Scene(root);
         primaryStage.setScene(scene);

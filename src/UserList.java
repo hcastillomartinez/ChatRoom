@@ -12,9 +12,17 @@ public class UserList {
     }
 
     public void addUser(User user){
+        for(int i=0;i<users.size();i++){
+            if(users.get(i).getName().equals(user.getName()))return;
+        }
         users.add(user);
     }
-
+    public User getUser(String userName){
+        for(int i=0;i<users.size();i++){
+            if(users.get(i).getName().equals(userName))return users.get(i);
+        }
+        return null;
+    }
     public List getAllList(){
         return users;
     }

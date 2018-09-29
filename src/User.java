@@ -39,6 +39,9 @@ public class User {
     public boolean getStatus(){
         return active;
     }
+    public void setStatus(boolean action){
+        active=action;
+    }
 
     /**
      * Grabs the last message from user

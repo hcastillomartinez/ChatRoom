@@ -14,13 +14,17 @@ public class Display {
     private Menu menu=new Menu("Menu");
     private MenuItem addUser=new MenuItem("Add User");
     private Button activeButton=new Button("ACTIVE");
-    private Button setOnlineButton =new Button("Set Online");
+    private Button allButton =new Button("ALL");
     private Button sendButton= new Button("SEND");
     private TextField textField= new TextField();
     private ScrollPane messageHolder= new ScrollPane();
     private ListView<String> userList=new ListView<>();
     private Pane userHolder=new Pane();
     private Text currentUserName=new Text("No User");
+
+    public Pane getUserHolder(){
+        return userHolder;
+    }
     public Button getActiveButton(){
         return activeButton;
     }
@@ -43,8 +47,8 @@ public class Display {
     public MenuItem getAddUser(){
         return addUser;
     }
-    public Button getSetOnlineButton(){
-        return setOnlineButton;
+    public Button getAllButton(){
+        return allButton;
     }
     public void createGUI(Stage primaryStage){
         root.setPrefSize(380,500);
@@ -63,12 +67,12 @@ public class Display {
         activeButton.setStyle("-fx-background-color: lightblue;"+"-fx-font-size: 13");
         root.getChildren().add(activeButton);
 
-        setOnlineButton.setLayoutX(266);
-        setOnlineButton.setLayoutY(79);
-        setOnlineButton.setPrefSize(90,39);
-        setOnlineButton.setStyle("-fx-background-color: lightblue;"+"-fx-font-size: 13");
-        setOnlineButton.wrapTextProperty().setValue(true);
-        root.getChildren().add(setOnlineButton);
+        allButton.setLayoutX(266);
+        allButton.setLayoutY(79);
+        allButton.setPrefSize(90,39);
+        allButton.setStyle("-fx-background-color: lightblue;"+"-fx-font-size: 13");
+        allButton.wrapTextProperty().setValue(true);
+        root.getChildren().add(allButton);
 
         textField.setLayoutX(14);
         textField.setLayoutY(434);

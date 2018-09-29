@@ -9,19 +9,20 @@ public class User {
     private boolean active;
     private String lastMessage;
     private String name;
+    private boolean messageSent;
 
     public User(String name){
         this.name=name;
         this.active=false;
+        this.messageSent=false;
     }
 
-//    /**
-//     * Gets all info (tuple) of user.
-//     * @return Returns a tuple that contains info of user in its pattern.
-//     */
-//    public Tuple getInfo(){
-//        return info;
-//    }
+    public void setMessageSent(boolean action){
+        messageSent=action;
+    }
+    public boolean isMessageSent(){
+        return messageSent;
+    }
 
     /**
      * Gets name of user.

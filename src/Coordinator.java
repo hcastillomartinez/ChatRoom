@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+/**
+ * @author Hector Castillo Martinez
+ */
 public class Coordinator extends Application {
     Display display=new Display();
     Messages messages=new Messages();
@@ -78,6 +80,7 @@ public class Coordinator extends Application {
         display.getUserHolder().setOnMousePressed(r->{
             if(currentUser!=null){
                 currentUser.setStatus(true);
+//                display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
             }
         });
         display.getUserList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {

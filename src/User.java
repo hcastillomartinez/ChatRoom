@@ -1,6 +1,7 @@
 package sample;
 
 /**
+ * @author Hector Castillo Martinez
  * When new User is created the tuple Info contains all of user's information in the pattern.
  * The first index is boolean to whether user is online or not. Second index is the users name.
  * Any index after that is the users messages with the last index being the latest message.

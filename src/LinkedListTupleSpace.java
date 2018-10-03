@@ -1,4 +1,6 @@
+package sample;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,13 +14,15 @@ public class LinkedListTupleSpace extends TupleSpace {
 
     public Tuple remove(Object... objects){
         Tuple t=new Tuple(objects);
+        Collections.shuffle(tupleList);
         for(Iterator<Tuple> iterator=tupleList.iterator();iterator.hasNext();){
-            if(iterator.next().getSize()==t.getSize()){
-                t=iterator.next();
+            Tuple temp=iterator.next();
+            if(temp.isEqual(t)==true){
                 iterator.remove();
                 return t;
             }
         }
+        System.out.println("not found");
         t=null;
         return t;
     }
@@ -26,11 +30,14 @@ public class LinkedListTupleSpace extends TupleSpace {
 
     public Tuple read(Object... objects){
         Tuple t=new Tuple(objects);
+        Collections.shuffle(tupleList);
         for(Iterator<Tuple> iterator=tupleList.iterator();iterator.hasNext();){
-//            if(iterator.next().getSize()==t.getSize()){
-//                return iterator.next();
-//            }
+            Tuple temp=iterator.next();
+            if(temp.isEqual(t)==true){
+                return temp;
+            }
         }
+        System.out.println("not found");
         t=null;
         return t;
     }

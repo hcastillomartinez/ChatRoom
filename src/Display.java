@@ -6,7 +6,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * @author Hector Castillo Martinez
+ *
+ */
 public class Display {
 
     private AnchorPane root=new AnchorPane();
@@ -22,34 +25,84 @@ public class Display {
     private Pane userHolder=new Pane();
     private Text currentUserName=new Text("No User");
 
+    /**
+     * Gets the pane where userName is displayed with a Text.
+     * @return Returns a Pane.
+     */
     public Pane getUserHolder(){
         return userHolder;
     }
+
+    /**
+     * Gets the button that will show only active users on the display.
+     * @return Returns a Button.
+     */
     public Button getActiveButton(){
         return activeButton;
     }
+
+    /**
+     * Gets the a text that is used to display users name.
+     * @return Returns a Text.
+     */
     public Text getCurrentUserName(){
         return currentUserName;
     }
+
+    /**
+     * Gets a Button that will send message
+     * @return Returns a Button.
+     */
     public Button getSendButton(){
         return sendButton;
     }
+
+    /**
+     * Gets the textField where messages are typed
+     * @return Returns a TextField.
+     */
     public TextField getTextField(){
         return textField;
     }
+
+    /**
+     * Gets the ListView<String> where the users are displayed.
+     * @return Returns a ListView<String>.
+     */
     public ListView<String> getUserList(){
         return userList;
     }
+
+    /**
+     * Updates the scrollPane used to display messages. Content set with a text that is
+     * a string from Messages.
+     * @param mgage a Messages object.
+     */
     public void setMessage(Messages mgage){
         Text message=new Text(mgage.getMessages());
         messageHolder.setContent(message);
     }
+
+    /**
+     * Gets the menuItem that will be used to add user to total users(all).
+     * @return Returns a MenuItem.
+     */
     public MenuItem getAddUser(){
         return addUser;
     }
+
+    /**
+     * Gets the button that will be used to show all users in display.
+     * @return Returns a Button.
+     */
     public Button getAllButton(){
         return allButton;
     }
+
+    /**
+     *
+     * @param primaryStage Stage
+     */
     public void createGUI(Stage primaryStage){
         root.setPrefSize(380,500);
         root.setStyle("-fx-background-color: #3333ff");
@@ -108,41 +161,7 @@ public class Display {
         currentUserName.setStyle("-fx-font-size: 16");
         userHolder.getChildren().add(currentUserName);
         root.getChildren().add(userHolder);
-//        addUser.setOnAction(e->{
-//            System.out.println("adduser");
-//            final Stage nestStage=new Stage();
-//            nestStage.setResizable(false);
-//            Pane pane=new Pane();
-//            TextField userNam=new TextField();
-//            userNam.setLayoutX(0);
-//            userNam.setPrefSize(80,20);
-//            Button add=new Button("ADD");
-//            add.setLayoutX(100);
-//            pane.getChildren().addAll(userNam,add);
-//            add.setOnMousePressed(el->{
-//                uList.addUser(new User(userNam.getText()));
-//                List<User> allUsers=uList.getAllList();
-//                userList.getItems().clear();
-//                for(int i=0;i<allUsers.size();i++){
-//                    userList.getItems().add(allUsers.get(i).getName());
-//                }
-//            });
-//            Scene scene = new Scene(pane);
-//            nestStage.setScene(scene);
-//            nestStage.show();
-//        });
-//
-//
-//
-//        Messages messages=new Messages();
-//        sendButton.setOnMousePressed(e->{
-//            DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss");
-//            LocalDateTime now=LocalDateTime.now();
-//            String time=dateTimeFormatter.format(now);
-//            messages.addMessage(time,new User("alex"),textField.getText());
-//            Text message=new Text(messages.getMessages());
-//            messageHolder.setContent(message);
-//        });
+
         Scene scene= new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);

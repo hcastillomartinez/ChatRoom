@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,7 +30,7 @@ public class Coordinator extends Application {
             String time=dateTimeFormatter.format(now);
             if(currentUser!=null) {
                 //only lets online users send message
-                if(currentUser.getStatus()==true && currentUser.isMessageSent()==false){
+                if(currentUser.getStatus()==true){
                     messages.addMessage(time, currentUser, display.getTextField().getText());
 //                    currentUser.setMessageSent(true);
                     display.setMessage(messages);
@@ -78,22 +79,30 @@ public class Coordinator extends Application {
             }
         });
         display.getUserHolder().setOnMousePressed(r->{
-            if(currentUser!=null){
+            if(currentUser!=null && currentUser.getStatus()==false){
                 currentUser.setStatus(true);
-//                display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
+                display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
+            }
+            else if(currentUser!=null && currentUser.getStatus()==true){
+                currentUser.setStatus(false);
+                display.getUserHolder().setStyle("-fx-background-color: lightblue;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
             }
         });
         display.getUserList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                System.out.println("ListView selection changed from oldValue = "
-                        + oldValue + " to newValue = " + newValue);
+//                System.out.println("ListView selection changed from oldValue = "
+//                        + oldValue + " to newValue = " + newValue);
                 //for when user is added or list displayed is changed. keeps selected user.
                 if(newValue!=null){
                     currentUser=backUserList.getUser(newValue);
+                    if(currentUser.getStatus()==true)display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
+                    else if(currentUser.getStatus()==false)display.getUserHolder().setStyle("-fx-background-color: lightblue;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
 //                    if(oldValue!=null)prevUser=backUserList.getUser(oldValue);
                 }
-                if(currentUser!=null)display.getCurrentUserName().setText(currentUser.getName());
+                if(currentUser!=null){
+                    display.getCurrentUserName().setText(currentUser.getName());
+                }
                 else display.getCurrentUserName().setText("No User");
             }
         });

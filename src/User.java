@@ -8,26 +8,31 @@ package sample;
  */
 public class User {
     private boolean active;
+    private boolean action;
     private String lastMessage;
     private String name;
-    private boolean messageSent;
 
     public User(String name){
         this.name=name;
         this.active=false;
-        this.messageSent=false;
+        this.action=false;
     }
 
-    public void setMessageSent(boolean action){
-        messageSent=action;
+//    public void setMessageSent(boolean action){
+//        messageSent=action;
+//    }
+//    public boolean isMessageSent(){
+//        return messageSent;
+//    }
+    public boolean isActionTaken(){
+        return action;
     }
-    public boolean isMessageSent(){
-        return messageSent;
+    public void setAction(){
+        this.action=true;
     }
-
     /**
      * Gets name of user.
-     * @return
+     * @return String that is name of user.
      */
     public String getName(){
         return name;

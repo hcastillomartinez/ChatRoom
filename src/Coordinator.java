@@ -18,11 +18,19 @@ import java.util.List;
  * of added user's actions.
  */
 public class Coordinator extends Application {
-    Display display=new Display();
-    Messages messages=new Messages();
-    DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss");
-    UserList backUserList=new UserList();
-    User currentUser=null;
+    private Display display=new Display();
+    private Messages messages=new Messages();
+    private DateTimeFormatter dateTimeFormatter=DateTimeFormatter.ofPattern("HH:mm:ss");
+    private UserList backUserList=new UserList();
+    private User currentUser=null;
+    
+    public void resetListViewActive(){
+        List<User> activeUsers=backUserList.getActiveList();
+        display.getUserList().getItems().clear();
+        for(int i=0;i<activeUsers.size();i++){
+            display.getUserList().getItems().add(activeUsers.get(i).getName());
+        }
+    }
     @Override
     public void start(Stage primaryStage){
         display.createGUI(primaryStage);
@@ -32,13 +40,17 @@ public class Coordinator extends Application {
             String time=dateTimeFormatter.format(now);
             if(currentUser!=null) {
                 //only lets online users send message
-                if(currentUser.getStatus()==true){
+                if(currentUser.getStatus()==true && currentUser.isActionTaken()==false){
                     String message=display.getTextField().getText();
                     if(message.equals("")==false) {
+                        currentUser.setAction(true);
                         messages.addMessage(time, currentUser, message);
                         display.setMessage(messages);
                         display.getTextField().setText("");
                     }
+                }
+                else{
+                    System.out.println("Select another User.");
                 }
             }
         });
@@ -86,21 +98,29 @@ public class Coordinator extends Application {
         });
         //when user is set online the pane holding userName shows green if online and blue if offline
         display.getUserHolder().setOnMousePressed(r->{
-            if(currentUser!=null && currentUser.getStatus()==false){
+            if(currentUser!=null && currentUser.getStatus()==false && currentUser.isActionTaken()==false){
+                currentUser.setAction(true);
                 currentUser.setStatus(true);
                 display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
             }
-            else if(currentUser!=null && currentUser.getStatus()==true){
+            else if(currentUser!=null && currentUser.getStatus()==true && currentUser.isActionTaken()==false){
+                currentUser.setAction(true);
                 currentUser.setStatus(false);
+                resetListViewActive();
                 display.getUserHolder().setStyle("-fx-background-color: lightblue;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
+            }
+            else if(currentUser!=null){
+                System.out.println("Select another User.");
             }
         });
         //handles selection of users from ListView
         display.getUserList().getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                System.out.println("Old: "+ oldValue+ " New: "+newValue);
                 //for when user is added or list displayed is changed. keeps selected user.
                 if(newValue!=null){
+                    if(currentUser!=null)currentUser.setAction(false);
                     currentUser=backUserList.getUser(newValue);
                     if(currentUser.getStatus()==true)display.getUserHolder().setStyle("-fx-background-color: lightgreen;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
                     else if(currentUser.getStatus()==false)display.getUserHolder().setStyle("-fx-background-color: lightblue;"+"-fx-border-radius: 10;"+"-fx-background-radius: 10");
@@ -109,7 +129,6 @@ public class Coordinator extends Application {
                 if(currentUser!=null){
                     display.getCurrentUserName().setText(currentUser.getName());
                 }
-                else display.getCurrentUserName().setText("No User");
             }
         });
 }

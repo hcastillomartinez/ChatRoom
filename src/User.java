@@ -2,33 +2,39 @@ package sample;
 
 /**
  * @author Hector Castillo Martinez
- * When new User is created the tuple Info contains all of user's information in the pattern.
- * The first index is boolean to whether user is online or not. Second index is the users name.
- * Any index after that is the users messages with the last index being the latest message.
+ * User has 3 member variables whether its active, has it taken an action, and its name.
+ * Can access these variables through getters and setters.
  */
 public class User {
     private boolean active;
     private boolean action;
-    private String lastMessage;
     private String name;
 
+    /**
+     * Creates user with given name and is set to not active and has not taken
+     * an action.
+     * @param name
+     */
     public User(String name){
         this.name=name;
         this.active=false;
         this.action=false;
     }
 
-//    public void setMessageSent(boolean action){
-//        messageSent=action;
-//    }
-//    public boolean isMessageSent(){
-//        return messageSent;
-//    }
+    /**
+     * Checks if User has taken an action yet.
+     * @return Returns a Boolean.
+     */
     public boolean isActionTaken(){
         return action;
     }
-    public void setAction(){
-        this.action=true;
+
+    /**
+     * Sets whether user has taken action or not.
+     * @param action boolean
+     */
+    public void setAction(boolean action){
+        this.action=action;
     }
     /**
      * Gets name of user.
@@ -46,19 +52,13 @@ public class User {
     public boolean getStatus(){
         return active;
     }
+
+    /**
+     * Sets whether user is active or not.
+     * @param action boolean
+     */
     public void setStatus(boolean action){
         active=action;
     }
 
-    /**
-     * Grabs the last message from user
-     * @return Returns String that is users last message
-     */
-    public String lastMessage(){
-        return lastMessage;
-    }
-
-    public void updateLastMessage(String message){
-        lastMessage=message;
-    }
 }

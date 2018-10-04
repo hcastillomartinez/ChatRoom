@@ -6,11 +6,14 @@ import java.util.List;
 
 /**
  * @author Hector Castillo Martinez
- *
+ * Empty intially and contains no duplicate users.
  */
 public class UserList {
     private List<User> users;
 
+    /**
+     * List of users made to be an ArrayList.
+     */
     public UserList(){
         users=new ArrayList<>();
     }
@@ -21,6 +24,7 @@ public class UserList {
      */
     public void addUser(User user){
         for(int i=0;i<users.size();i++){
+            //so duplicates are not added
             if(users.get(i).getName().equals(user.getName()))return;
         }
         users.add(user);

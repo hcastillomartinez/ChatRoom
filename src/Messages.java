@@ -1,6 +1,8 @@
 package sample;
 /**
  * @author Hector Castillo Martinez
+ * When Messages is created the time array is of size 10, and the tupleSpace uses the
+ * HashMapTupleSpace implementation. Also has a count to use as modulus for when looking for last 10 to print.
  */
 public class Messages {
     private String[] times;

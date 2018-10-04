@@ -2,17 +2,21 @@ package sample;
 
 import java.util.*;
 
+/**
+ * HashMap implementation, the key is the size of the tuples pattern and the value is a list pertaining to
+ * tuples of key's size.
+ */
 public class HashMapTupleSpace extends TupleSpace{
 
-    HashMap<Integer,List<Tuple>>map=new HashMap<>();
+    private HashMap<Integer,List<Tuple>>map=new HashMap<>();
 
-    /**
-     * Adds tuple to Tuple space first checking if List of the tuples size already
-     * exists. If it doesn't then key is size of Tuple(number of objects in pattern) and value
-     * is a List is then added to HashMap. If it already exists then simply added to
-     * List.
-     * @param tuple The Tuple to be added to the tuple space
-     */
+//    /**
+//     * Adds tuple to Tuple space first checking if List of the tuples size already
+//     * exists. If it doesn't then key is size of Tuple(number of objects in pattern) and value
+//     * is a List is then added to HashMap. If it already exists then simply added to
+//     * List.
+//     * @param tuple The Tuple to be added to the tuple space
+//     */
     public void add(Tuple tuple) {
         //list of tuple size doesn't exist yet
         if (map.containsKey(tuple.getSize()) == false) {
@@ -28,11 +32,11 @@ public class HashMapTupleSpace extends TupleSpace{
         }
     }
 
-    /**
-     * Removes a Tuple that matches the pattern passed in as argument from TupleSpace.
-     * @param pattern Tuple's objects
-     * @return Returns Tuple that was removed from TupleSpace, if not found returns the one searched for
-     */
+//    /**
+//     * Removes a Tuple that matches the pattern passed in as argument from TupleSpace.
+//     * @param pattern Tuple's objects
+//     * @return Returns Tuple that was removed from TupleSpace, if not found returns null.
+//     */
     public Tuple remove(Object... pattern){
         Tuple p=new Tuple(pattern);
         if(map.containsKey(p.getSize())==true){
@@ -46,16 +50,15 @@ public class HashMapTupleSpace extends TupleSpace{
                 }
             }
         }
-        System.out.println("not found returning search");
         p=null;
         return p;
     }
 
-    /**
-     *Checks if pattern exists in a Tuple in the TupleSpace
-     * @param pattern Tuple's objects
-     * @return Returns A Tuple that matches pattern with pattern in parameter.
-     */
+//    /**
+//     *Checks if pattern exists in a Tuple in the TupleSpace
+//     * @param pattern Tuple's objects
+//     * @return Returns A Tuple that matches pattern with pattern in parameter, else returns null.
+//     */
     public  Tuple read(Object... pattern){
         Tuple p=new Tuple(pattern);
         if(map.containsKey(p.getSize())==true){
@@ -68,7 +71,6 @@ public class HashMapTupleSpace extends TupleSpace{
                 }
             }
         }
-        System.out.println("not found returning search");
         p=null;
         return p;
     }

@@ -1,11 +1,14 @@
 package sample;
 
+/**
+ * @author Hector Castillo Martinez
+ *Tuples are immutable when created. Can contain any size ellipse of Objects.
+ */
 public class Tuple {
     private Object[] pattern;
     private int size;
 
     /**
-     * @author Hector Castillo Martinez
      * Creates tuple with pattern passed into arguments and size is length of this pattern.
      * @param objects
      */
@@ -15,13 +18,17 @@ public class Tuple {
     }
 
     /**
-     * Gets the size of the Tuple's pattern.
+     * Gets the length of the Tuple's pattern.
      * @return Returns an Int
      */
     public int getSize(){
         return size;
     }
 
+    /**
+     * Take the pattern and turns it into a string.
+     * @return Returns A String that is the pattern.
+     */
     public String stringTuple(){
         String tupleString="";
         for(int i=0;i<size;i++){

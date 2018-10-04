@@ -8,7 +8,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 /**
  * @author Hector Castillo Martinez
- *
+ *  Used to make the GUI for a chatRoom.
  */
 public class Display {
 
@@ -100,8 +100,8 @@ public class Display {
     }
 
     /**
-     *
-     * @param primaryStage Stage
+     * Creates the GUI for the chatRoom.
+     * @param primaryStage JavaFX Stage
      */
     public void createGUI(Stage primaryStage){
         root.setPrefSize(380,500);
@@ -130,7 +130,6 @@ public class Display {
         textField.setLayoutX(14);
         textField.setLayoutY(434);
         textField.setPrefSize(252,52);
-        textField.setText("Type Message");
         root.getChildren().add(textField);
 
         sendButton.setLayoutY(434);

@@ -1,6 +1,5 @@
 package sample;
 /**
- * @author Hector Castillo Martinez
  * When Messages is created the time array is of size 10, and the tupleSpace uses the
  * HashMapTupleSpace implementation. Also has a count to use as modulus for when looking for last 10 to print.
  */
@@ -41,9 +40,22 @@ public class Messages {
         for(String s: times){
             if(s!=null) {
                 Tuple tuple = allMessages.read(s, "*", "*");
-                message += tuple.stringTuple();
+                message += messageToString(tuple.getPattern());
             }
         }
         return message;
+    }
+    //converts tuples pattern into a string(the message)
+    private String messageToString(Object[] objects){
+        String tupleString="";
+        for(int i=0;i<objects.length;i++){
+            if(objects[i].getClass()==new User("temp").getClass()){
+                User temp=(User) objects[i];
+                tupleString+=temp.getName()+": ";
+            }
+            else tupleString+=objects[i]+" ";
+        }
+        tupleString+="\n";
+        return tupleString;
     }
 }

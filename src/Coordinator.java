@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 /**
- * @author Hector Castillo Martinez
  * When Run it launches GUI that is like a chatRoom.
  * User must add users to program and they will have complete control
  * of added user's actions.
@@ -105,7 +104,10 @@ public class Coordinator extends Application {
     @Override
     public void start(Stage primaryStage){
         display.createGUI(primaryStage);
-
+        backUserList.addUser(new User("Terry"));
+        backUserList.addUser(new User("Bob"));
+        resetListViewAll();
+        
         //when message button is pressed messages are handled
         display.getSendButton().setOnMousePressed(e->{
             updateMessages();

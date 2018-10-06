@@ -5,7 +5,7 @@ Using TupleSpace to build chatRoom where each chatRoom user has a name, the user
 messages received from any users on list are shown in chronological order, and each user has ability to generate new message,
 which can be seen by any user. 
 ## Usage
-No users exist when program is run initially and should be added in by person using program. No two users can have the
+2 users exist when program is run initially and more can be added in by person using program. No two users can have the
 same name and when added will change list shown to be list showing all users. When users are added they are set to not
 taken their turn yet and are not active(online). Each user can only do one thing once they are selected either set 
 online/offline or send a message. When user has taken action they will not be allowed to do anything else until another
@@ -17,9 +17,13 @@ users and all button will show all users.
 It made sense to make the messages from users the tuples (pattern: timeStamp,User,message) and storing all messages, regardless
 of User, in same TupleSpace. When user takes turn I made it so person using program must select another user manually.
 ## Versions
-In top level of directory.
+2 versions in top level of directory.
 ### V1
-Does what is specified in usage. 
+Can add users, send new messages, view last ten messages, can set users online/offline. Has no users initially and 
+2 need to be added otherwise single user will be stuck until new user that can be selected is added.
+### V2
+Has same functionality as version 1 but now program starts with two users. Done this way so that program does not get stuck
+if person using program only adds 1 user. 
 ## Docs
 In doc folder you will find both diagrams and description of testing.
 ## Status
@@ -28,5 +32,4 @@ Can add any amount of users, each user can be set online or offline, user has ab
 all users or only the active users, only last 10 messages will be displayed. User can add new messages and only take one 
 action per turn.
 ### Known Issues 
-Person using program needs to add at least 2 people initially so that turns could be taken place, otherwise single user 
-would be stuck until new user is added and then selected.
+No known issues

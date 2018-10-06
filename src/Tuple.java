@@ -1,7 +1,6 @@
 package sample;
 
 /**
- * @author Hector Castillo Martinez
  *Tuples are immutable when created. Can contain any size ellipse of Objects.
  */
 public class Tuple {
@@ -25,22 +24,6 @@ public class Tuple {
         return size;
     }
 
-    /**
-     * Take the pattern and turns it into a string.
-     * @return Returns A String that is the pattern.
-     */
-    public String stringTuple(){
-        String tupleString="";
-        for(int i=0;i<size;i++){
-            if(pattern[i].getClass()==new User("temp").getClass()){
-                User temp=(User) pattern[i];
-                tupleString+=temp.getName()+": ";
-            }
-            else tupleString+=pattern[i]+" ";
-        }
-        tupleString+="\n";
-        return tupleString;
-    }
 
     /**
      * Checks tuple and another tuple to see if they are equal based on their

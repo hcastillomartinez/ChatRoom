@@ -1,5 +1,5 @@
 # TupleSpace/ChatRoom
-## Students: Hector Castillo Martinez
+## Collaborators: Hector Castillo Martinez
 ## Introduction
 Using TupleSpace to build chatRoom where each chatRoom user has a name, the user has ability to see active/all users, last 10
 messages received from any users on list are shown in chronological order, and each user has ability to generate new message,
